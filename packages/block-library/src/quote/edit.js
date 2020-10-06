@@ -10,6 +10,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	AlignmentToolbar,
 	BlockControls,
+	InnerBlocks,
 	RichText,
 	useBlockProps,
 } from '@wordpress/block-editor';
@@ -45,39 +46,13 @@ export default function QuoteEdit( {
 				/>
 			</BlockControls>
 			<BlockQuotation { ...blockProps }>
-				<RichText
-					identifier="value"
-					multiline
-					value={ value }
-					onChange={ ( nextValue ) =>
-						setAttributes( {
-							value: nextValue,
-						} )
-					}
-					onMerge={ mergeBlocks }
-					onRemove={ ( forward ) => {
-						const hasEmptyCitation =
-							! citation || citation.length === 0;
-						if ( ! forward && hasEmptyCitation ) {
-							onReplace( [] );
-						}
-					} }
-					aria-label={ __( 'Quote text' ) }
-					placeholder={
-						// translators: placeholder text used for the quote
-						__( 'Write quote…' )
-					}
-					onReplace={ onReplace }
-					onSplit={ ( piece ) =>
-						createBlock( 'core/quote', {
-							...attributes,
-							value: piece,
-						} )
-					}
-					__unstableOnSplitMiddle={ () =>
-						createBlock( 'core/paragraph' )
-					}
-					textAlign={ align }
+				<InnerBlocks
+					allowedBlocks={ [
+						'core/code',
+						'core/heading',
+						'core/list',
+						'core/paragraph',
+					] }
 				/>
 				{ ( ! RichText.isEmpty( citation ) || isSelected ) && (
 					<RichText
