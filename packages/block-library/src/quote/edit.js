@@ -21,13 +21,11 @@ export default function QuoteEdit( {
 	attributes,
 	setAttributes,
 	isSelected,
-	mergeBlocks,
-	onReplace,
 	className,
 	insertBlocksAfter,
 	mergedStyle,
 } ) {
-	const { align, value, citation } = attributes;
+	const { align, citation } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( className, {
 			[ `has-text-align-${ align }` ]: align,
