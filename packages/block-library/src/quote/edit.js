@@ -35,14 +35,13 @@ export default function QuoteEdit( {
 		style: mergedStyle,
 	} );
 
-	const { hasChildBlocks, isAncestorOfSelectedBlock } = useSelect(
+	const { isAncestorOfSelectedBlock } = useSelect(
 		( select ) => {
-			const { getBlockOrder, hasSelectedInnerBlock } = select(
+			const { hasSelectedInnerBlock } = select(
 				'core/block-editor'
 			);
 
 			return {
-				hasChildBlocks: getBlockOrder( clientId ).length > 0,
 				isAncestorOfSelectedBlock: hasSelectedInnerBlock(
 					clientId,
 					true
@@ -70,11 +69,6 @@ export default function QuoteEdit( {
 						'core/list',
 						'core/paragraph',
 					] }
-					renderAppender={
-						hasChildBlocks
-							? undefined
-							: InnerBlocks.ButtonBlockAppender
-					}
 				/>
 				{ ( ! RichText.isEmpty( citation ) ||
 					isSelected ||
