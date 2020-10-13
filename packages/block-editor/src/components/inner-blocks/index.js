@@ -179,11 +179,14 @@ export function useInnerBlocksProps( props = {}, options = {} ) {
 			}
 		),
 		children: (
-			<InnerBlocks
-				{ ...options }
-				clientId={ clientId }
-				wrapperRef={ ref }
-			/>
+			<>
+				<InnerBlocks
+					{ ...options }
+					clientId={ clientId }
+					wrapperRef={ ref }
+				/>
+				{ props.children }
+			</>
 		),
 	};
 }
