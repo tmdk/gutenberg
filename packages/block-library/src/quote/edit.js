@@ -50,7 +50,7 @@ export default function QuoteEdit( {
 			[ `has-text-align-${ align }` ]: align,
 		} ),
 		style: mergedStyle,
-		children: ( ! RichText.isEmpty( citation ) ||
+		childrenAfter: ( ! RichText.isEmpty( citation ) ||
 			isSelected ||
 			isAncestorOfSelectedBlock ) && (
 			<RichText
