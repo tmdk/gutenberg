@@ -17,6 +17,7 @@ import {
 import { BlockQuotation } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
 import { useSelect } from '@wordpress/data';
+import { Fragment } from '@wordpress/element';
 
 export default function QuoteEdit( {
 	attributes,
@@ -74,7 +75,7 @@ export default function QuoteEdit( {
 			/>
 		),
 	} );
-	const innerBlocksProps = useInnerBlocksProps( blockProps );
+	const innerBlocksProps = useInnerBlocksProps();
 
 	return (
 		<>
@@ -86,7 +87,32 @@ export default function QuoteEdit( {
 					} }
 				/>
 			</BlockControls>
-			<BlockQuotation { ...innerBlocksProps } />
+			<BlockQuotation { ...blockProps }>
+				<Fragment { ...innerBlocksProps } />
+				{ ( ! RichText.isEmpty( citation ) ||
+					isSelected ||
+					isAncestorOfSelectedBlock ) && (
+					<RichText
+						identifier="citation"
+						value={ citation }
+						onChange={ ( nextCitation ) =>
+							setAttributes( {
+								citation: nextCitation,
+							} )
+						}
+						__unstableMobileNoFocusOnMount
+						placeholder={
+							// translators: placeholder text used for the citation
+							__( 'Write citation…' )
+						}
+						className="wp-block-quote__citation"
+						textAlign={ align }
+						__unstableOnSplitAtEnd={ () =>
+							insertBlocksAfter( createBlock( 'core/paragraph' ) )
+						}
+					/>
+				) }
+			</BlockQuotation>
 		</>
 	);
 }
