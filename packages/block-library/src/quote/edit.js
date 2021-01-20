@@ -23,12 +23,14 @@ export default function QuoteEdit( {
 	isSelected,
 	className,
 	insertBlocksAfter,
+	mergedStyle,
 } ) {
 	const { align, citation } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( className, {
 			[ `has-text-align-${ align }` ]: align,
 		} ),
+		style: mergedStyle,
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps );
 
@@ -54,6 +56,7 @@ export default function QuoteEdit( {
 							} )
 						}
 						__unstableMobileNoFocusOnMount
+						aria-label={ __( 'Quote citation text' ) }
 						placeholder={
 							// translators: placeholder text used for the citation
 							__( 'Write citation…' )
