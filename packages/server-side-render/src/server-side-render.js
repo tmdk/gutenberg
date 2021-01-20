@@ -131,11 +131,9 @@ export default function ServerSideRender( props ) {
 	} );
 
 	if ( response === '' ) {
-		return <EmptyResponsePlaceholder response={ response } { ...props } />;
+		return <EmptyResponsePlaceholder { ...props } />;
 	} else if ( ! response ) {
-		return (
-			<LoadingResponsePlaceholder response={ response } { ...props } />
-		);
+		return <LoadingResponsePlaceholder { ...props } />;
 	} else if ( response.error ) {
 		return <ErrorResponsePlaceholder response={ response } { ...props } />;
 	}
