@@ -44,8 +44,7 @@ export default function QuoteEdit( {
 			</BlockControls>
 			<BlockQuotation { ...innerBlocksProps }>
 				{ innerBlocksProps.children }
-				{ ( ! RichText.isEmpty( citation ) ||
-					isSelected ) && (
+				{ ( ! RichText.isEmpty( citation ) || isSelected ) && (
 					<RichText
 						identifier="citation"
 						value={ citation }
