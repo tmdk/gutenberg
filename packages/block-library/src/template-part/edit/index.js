@@ -69,16 +69,6 @@ export default function TemplatePartEdit( {
 
 	const blockProps = useBlockProps();
 
-	if ( hasAlreadyRendered ) {
-		return (
-			<TagName { ...blockProps }>
-				<Warning>
-					{ __( 'Block cannot be rendered inside itself.' ) }
-				</Warning>
-			</TagName>
-		);
-	}
-
 	const isPlaceholder = ! slug;
 	if ( ! isPlaceholder && isMissing ) {
 		return (
@@ -87,6 +77,16 @@ export default function TemplatePartEdit( {
 					{ __(
 						'Template part has been deleted or is unavailable.'
 					) }
+				</Warning>
+			</TagName>
+		);
+	}
+
+	if ( hasAlreadyRendered ) {
+		return (
+			<TagName { ...blockProps }>
+				<Warning>
+					{ __( 'Block cannot be rendered inside itself.' ) }
 				</Warning>
 			</TagName>
 		);
