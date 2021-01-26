@@ -7,6 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useEffect, useState } from '@wordpress/element';
 import {
 	AlignmentToolbar,
 	BlockControls,
@@ -29,7 +30,8 @@ export default function QuoteEdit( {
 	insertBlocksAfter,
 	mergedStyle,
 } ) {
-	const { align, citation, withCitation } = attributes;
+	const [ withCitation, setWithCitation ] = useState( false );
+	const { align, citation } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( className, {
 			[ `has-text-align-${ align }` ]: align,
@@ -37,6 +39,13 @@ export default function QuoteEdit( {
 		style: mergedStyle,
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps );
+
+	// On mount, initialize withCitation depending on the citation value.
+	useEffect( () => {
+		if ( ! RichText.isEmpty( citation ) ) {
+			setWithCitation( true );
+		}
+	}, [] );
 
 	const shouldCitationBeVisible =
 		( isSelected && withCitation ) ||
@@ -56,14 +65,11 @@ export default function QuoteEdit( {
 						isActive={ withCitation }
 						label={ __( 'Toogle citation visibility' ) }
 						onClick={ () => {
-							const newAttributes = {
-								withCitation: ! withCitation,
-							};
 							if ( true === withCitation ) {
 								// Reset text if it's transitioning to hidden.
-								newAttributes.citation = '';
+								setAttributes( { citation: '' } );
 							}
-							setAttributes( newAttributes );
+							setWithCitation( ! withCitation );
 						} }
 					>
 						{ withCitation
