@@ -61,7 +61,7 @@ export default function QuoteEdit( {
 							setAttributes( newAttributes );
 						} }
 					>
-						{ __( 'Add citation' ) }
+						{ withCitation ? __( 'Remove citation' ) : __( 'Add citation' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>
