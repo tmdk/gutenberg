@@ -14,7 +14,11 @@ import {
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 	RichText,
 } from '@wordpress/block-editor';
-import { BlockQuotation } from '@wordpress/components';
+import {
+	BlockQuotation,
+	ToolbarGroup,
+	ToolbarButton,
+} from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
 
 export default function QuoteEdit( {
@@ -42,6 +46,13 @@ export default function QuoteEdit( {
 						setAttributes( { align: nextAlign } );
 					} }
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						onClick={ () => setAttributes( { withCitation: ! withCitation} ) }
+					>
+						{ __( 'Add citation' ) }
+					</ToolbarButton>
+				</ToolbarGroup>
 			</BlockControls>
 			<BlockQuotation { ...innerBlocksProps }>
 				{ innerBlocksProps.children }
