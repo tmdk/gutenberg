@@ -51,15 +51,17 @@ export default function QuoteEdit( {
 						isActive={ withCitation }
 						label={ __( 'Toogle citation visibility' ) }
 						onClick={ () => {
-							const newAttributes = { withCitation: ! withCitation };
+							const newAttributes = {
+								withCitation: ! withCitation,
+							};
 							if ( true === withCitation ) {
 								// Reset text if it's transitioning to hidden.
-								newAttributes.citation = ''
+								newAttributes.citation = '';
 							}
-							setAttributes( newAttributes )
+							setAttributes( newAttributes );
 						} }
 					>
-						{ __( 'Add citation') }
+						{ __( 'Add citation' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>
