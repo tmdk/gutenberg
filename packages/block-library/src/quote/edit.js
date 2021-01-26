@@ -21,6 +21,7 @@ import {
 	ToolbarButton,
 } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
 
 export default function QuoteEdit( {
 	attributes,
@@ -29,6 +30,7 @@ export default function QuoteEdit( {
 	className,
 	insertBlocksAfter,
 	mergedStyle,
+	clientId,
 } ) {
 	const [ withCitation, setWithCitation ] = useState( false );
 	const { align, citation } = attributes;
@@ -39,6 +41,9 @@ export default function QuoteEdit( {
 		style: mergedStyle,
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps );
+	const isAncestorOfSelectedBlock = useSelect( ( select ) =>
+		select( 'core/block-editor' ).hasSelectedInnerBlock( clientId )
+	);
 
 	// On mount, initialize withCitation depending on the citation value.
 	useEffect( () => {
@@ -47,9 +52,10 @@ export default function QuoteEdit( {
 		}
 	}, [] );
 
-	const shouldCitationBeVisible =
-		( isSelected && withCitation ) ||
-		( ! isSelected && withCitation && ! RichText.isEmpty( citation ) );
+	let shouldCitationBeVisible = ! RichText.isEmpty( citation );
+	if ( isSelected || isAncestorOfSelectedBlock ) {
+		shouldCitationBeVisible = withCitation;
+	}
 
 	return (
 		<>
