@@ -20,12 +20,11 @@ import { createBlock } from '@wordpress/blocks';
 export default function QuoteEdit( {
 	attributes,
 	setAttributes,
-	isSelected,
 	className,
 	insertBlocksAfter,
 	mergedStyle,
 } ) {
-	const { align, citation } = attributes;
+	const { align, citation, withCitation } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( className, {
 			[ `has-text-align-${ align }` ]: align,
@@ -46,7 +45,7 @@ export default function QuoteEdit( {
 			</BlockControls>
 			<BlockQuotation { ...innerBlocksProps }>
 				{ innerBlocksProps.children }
-				{ ( ! RichText.isEmpty( citation ) || isSelected ) && (
+				{ withCitation && (
 					<RichText
 						identifier="citation"
 						value={ citation }

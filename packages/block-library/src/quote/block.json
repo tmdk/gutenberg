@@ -3,6 +3,10 @@
 	"name": "core/quote",
 	"category": "text",
 	"attributes": {
+		"withCitation": {
+			"type": "boolean",
+			"default": false
+		},
 		"citation": {
 			"type": "string",
 			"source": "html",
