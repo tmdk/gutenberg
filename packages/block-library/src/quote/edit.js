@@ -24,6 +24,7 @@ import { createBlock } from '@wordpress/blocks';
 export default function QuoteEdit( {
 	attributes,
 	setAttributes,
+	isSelected,
 	className,
 	insertBlocksAfter,
 	mergedStyle,
@@ -36,6 +37,10 @@ export default function QuoteEdit( {
 		style: mergedStyle,
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps );
+
+	const shouldCitationBeVisible =
+		( isSelected && withCitation ) ||
+		( ! isSelected && withCitation && ! RichText.isEmpty( citation ) );
 
 	return (
 		<>
@@ -69,7 +74,7 @@ export default function QuoteEdit( {
 			</BlockControls>
 			<BlockQuotation { ...innerBlocksProps }>
 				{ innerBlocksProps.children }
-				{ withCitation && (
+				{ shouldCitationBeVisible && (
 					<RichText
 						identifier="citation"
 						value={ citation }
