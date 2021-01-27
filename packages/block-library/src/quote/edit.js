@@ -78,9 +78,7 @@ export default function QuoteEdit( {
 							setWithCitation( ! withCitation );
 						} }
 					>
-						{ withCitation
-							? __( 'Remove citation' )
-							: __( 'Add citation' ) }
+						{ __( 'Add citation' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>
