@@ -2,10 +2,18 @@
 	display: flex;
 	align-items: center;
 	position: relative;
-	margin: 0 0.5em 0 0;
 
 	.wp-block-navigation__container:empty {
 		display: none;
+	}
+}
+
+// Overrides generic ".entry-content li" styles on the front end.
+.wp-block-navigation-link.wp-block-navigation-link {
+	margin: 0 0.5em 0 0;
+
+	.is-vertical & {
+		margin: 0 0 0.5em 0;
 	}
 }
 
