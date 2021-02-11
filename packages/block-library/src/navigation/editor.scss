@@ -6,6 +6,12 @@
 	padding-left: 0;
 }
 
+// Every block inherits margins that unfortunately have to be unset.
+// This CSS duplicates CSS from style.scss
+.wp-block-navigation .block-editor-block-list__block {
+	margin: 0;
+}
+
 .wp-block-navigation__inserter-content {
 	padding: $grid-unit-20;
 }
