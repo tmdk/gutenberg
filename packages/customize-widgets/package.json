@@ -5,7 +5,9 @@
 	"description": "Widgets blocks in Customizer Module for WordPress.",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"keywords": [ "wordpress" ],
+	"keywords": [
+		"wordpress"
+	],
 	"homepage": "https://github.com/WordPress/gutenberg/tree/master/packages/customize-widgets/README.md",
 	"repository": {
 		"type": "git",
@@ -29,5 +31,8 @@
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"volta": {
+		"extends": "../../package.json"
 	}
 }
