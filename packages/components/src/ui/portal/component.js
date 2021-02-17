@@ -22,10 +22,9 @@ import { Portal as BasePortal } from 'reakit';
  * }
  * ```
  *
- * @param {import('@wp-g2/create-styles').ViewOwnProps<{}, never>} props
+ * @param {import('@wp-g2/create-styles').ViewOwnProps<{}, 'div'>} props
  */
 /* eslint-enable jsdoc/valid-types */
-
 function Portal( { children } ) {
 	return (
 		<BasePortal>
