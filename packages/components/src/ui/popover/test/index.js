@@ -7,12 +7,14 @@ import { Button } from '@wp-g2/components';
 /**
  * Internal dependencies
  */
-import { CardBody } from '../../Card';
+import { CardBody } from '../../card';
 import { Popover } from '../index';
 
 describe( 'props', () => {
-	test( 'should render correctly', () => {
-		const { container } = render(
+	let base;
+
+	beforeEach( () => {
+		base = render(
 			<Popover
 				baseId="popover"
 				trigger={ <Button>WordPress.org</Button> }
@@ -20,7 +22,9 @@ describe( 'props', () => {
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+	} );
+	test( 'should render correctly', () => {
+		expect( base.container.firstChild ).toMatchSnapshot();
 	} );
 
 	test( 'should render visible', () => {
@@ -33,7 +37,9 @@ describe( 'props', () => {
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchStyleDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render without trigger', () => {
@@ -62,12 +68,13 @@ describe( 'props', () => {
 				animated={ false }
 				baseId="popover"
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchStyleDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render gutter', () => {
@@ -76,12 +83,13 @@ describe( 'props', () => {
 				baseId="popover"
 				gutter={ 8 }
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchStyleDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render label', () => {
@@ -91,12 +99,13 @@ describe( 'props', () => {
 				gutter={ 8 }
 				label="show"
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render without modal', () => {
@@ -105,12 +114,13 @@ describe( 'props', () => {
 				baseId="popover"
 				modal={ false }
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render maxWidth', () => {
@@ -119,27 +129,27 @@ describe( 'props', () => {
 				baseId="popover"
 				maxWidth={ 321 }
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchStyleDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 
 	test( 'should render placement', () => {
 		const { container } = render(
 			<Popover
-				animated={ false }
 				baseId="popover"
-				gutter={ 8 }
 				placement="bottom-start"
 				trigger={ <Button>WordPress.org</Button> }
-				visible
 			>
 				<CardBody>Code is Poetry</CardBody>
 			</Popover>
 		);
-		expect( container.firstChild ).toMatchSnapshot();
+		expect( container.firstChild ).toMatchStyleDiffSnapshot(
+			base.container.firstChild
+		);
 	} );
 } );
