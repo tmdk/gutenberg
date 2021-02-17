@@ -14,7 +14,11 @@ export default {
 
 export const _default = () => {
 	return (
-		<Popover trigger={ <Button>Click</Button> } visible>
+		<Popover
+			trigger={ <Button>Click</Button> }
+			visible
+			placement="bottom-start"
+		>
 			<CardHeader>Go</CardHeader>
 			<CardBody>Stuff</CardBody>
 		</Popover>
