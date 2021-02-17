@@ -16,4 +16,9 @@ export const PopoverContent = css`
 	&[data-enter] {
 		opacity: 1;
 	}
+
+	&::before,
+	&::after {
+		display: none;
+	}
 `;
