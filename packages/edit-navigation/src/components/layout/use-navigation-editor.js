@@ -8,11 +8,17 @@ import { useState, useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import { store as editNavigationStore } from '../../store';
+import { store as noticesStore } from '@wordpress/notices';
+import { __ } from '@wordpress/i18n';
 
 export default function useNavigationEditor() {
 	const [ hasFinishedInitialLoad, setHasFinishedInitialLoad ] = useState(
 		false
 	);
+	const [ selectedMenuId, setSelectedMenuId ] = useState( null );
+	const [ isMenuDeleted, setIsMenuDeleted ] = useState( true );
+	const [ isMenuBeingDeleted, setIsMenuBeingDeleted ] = useState( false );
+
 	const { menus, hasLoadedMenus } = useSelect( ( select ) => {
 		const selectors = select( 'core' );
 		const params = { per_page: -1 };
@@ -24,13 +30,13 @@ export default function useNavigationEditor() {
 		};
 	}, [] );
 
+	const { createErrorNotice, createInfoNotice } = useDispatch( noticesStore );
+
 	useEffect( () => {
 		if ( hasLoadedMenus ) {
 			setHasFinishedInitialLoad( true );
 		}
 	}, [ hasLoadedMenus ] );
-
-	const [ selectedMenuId, setSelectedMenuId ] = useState( null );
 
 	useEffect( () => {
 		if ( ! selectedMenuId && menus?.length ) {
@@ -57,11 +63,20 @@ export default function useNavigationEditor() {
 	const { deleteMenu: _deleteMenu } = useDispatch( 'core' );
 
 	const deleteMenu = async () => {
+		setIsMenuBeingDeleted( true );
 		const didDeleteMenu = await _deleteMenu( selectedMenuId, {
 			force: true,
 		} );
 		if ( didDeleteMenu ) {
+			setIsMenuBeingDeleted( false );
 			setSelectedMenuId( null );
+			createInfoNotice( __( 'Menu deleted' ), {
+				type: 'snackbar',
+				isDismissible: true,
+			} );
+			setIsMenuDeleted( true );
+		} else {
+			createErrorNotice( __( 'Menu deletion unsuccessful' ) );
 		}
 	};
 
@@ -71,7 +86,10 @@ export default function useNavigationEditor() {
 		hasFinishedInitialLoad,
 		selectedMenuId,
 		navigationPost,
+		isMenuBeingDeleted,
 		selectMenu,
 		deleteMenu,
+		isMenuDeleted,
+		setIsMenuDeleted,
 	};
 }

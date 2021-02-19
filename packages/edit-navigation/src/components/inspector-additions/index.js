@@ -10,7 +10,11 @@ import { InspectorControls } from '@wordpress/block-editor';
 import AutoAddPagesPanel from './auto-add-pages-panel';
 import DeleteMenuPanel from './delete-menu-panel';
 
-export default function InspectorAdditions( { menuId, onDeleteMenu } ) {
+export default function InspectorAdditions( {
+	menuId,
+	onDeleteMenu,
+	isMenuBeingDeleted,
+} ) {
 	const selectedBlock = useSelect(
 		( select ) => select( 'core/block-editor' ).getSelectedBlock(),
 		[]
@@ -21,9 +25,12 @@ export default function InspectorAdditions( { menuId, onDeleteMenu } ) {
 	}
 
 	return (
-		<InspectorControls>
+		<div>
 			<AutoAddPagesPanel menuId={ menuId } />
-			<DeleteMenuPanel onDeleteMenu={ onDeleteMenu } />
-		</InspectorControls>
+			<DeleteMenuPanel
+				onDeleteMenu={ onDeleteMenu }
+				isMenuBeingDeleted={ isMenuBeingDeleted }
+			/>
+		</div>
 	);
 }

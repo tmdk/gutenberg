@@ -35,6 +35,7 @@ import Notices from '../notices';
 import Editor from '../editor';
 import InspectorAdditions from '../inspector-additions';
 import { store as editNavigationStore } from '../../store';
+import MenuSelector from '../menu-selector';
 
 export default function Layout( { blockEditorSettings } ) {
 	const canvasRef = useRef();
@@ -49,8 +50,11 @@ export default function Layout( { blockEditorSettings } ) {
 		hasFinishedInitialLoad,
 		selectedMenuId,
 		navigationPost,
+		isMenuBeingDeleted,
 		selectMenu,
 		deleteMenu,
+		isMenuDeleted,
+		setIsMenuDeleted,
 	} = useNavigationEditor();
 
 	const [ blocks, onInput, onChange ] = useNavigationBlockEditor(
@@ -61,9 +65,12 @@ export default function Layout( { blockEditorSettings } ) {
 
 	const hasMenus = !! menus?.length;
 	const isBlockEditorReady = !! ( hasMenus && navigationPost );
-
 	return (
 		<ErrorBoundary>
+			<div
+				hidden={ ! isMenuBeingDeleted }
+				className={ 'edit-naviagation__shadow' }
+			/>
 			<SlotFillProvider>
 				<DropZoneProvider>
 					<BlockEditorKeyboardShortcuts.Register />
@@ -109,14 +116,25 @@ export default function Layout( { blockEditorSettings } ) {
 									className="edit-navigation-layout__canvas"
 									ref={ canvasRef }
 								>
-									<Editor
-										isPending={ ! hasLoadedMenus }
-										blocks={ blocks }
-									/>
+									{ isMenuDeleted ? (
+										<MenuSelector
+											onSelectMenu={ ( menu ) => {
+												setIsMenuDeleted( false );
+												selectMenu( menu );
+											} }
+											menus={ menus }
+										/>
+									) : (
+										<Editor
+											isPending={ ! hasLoadedMenus }
+											blocks={ blocks }
+										/>
+									) }
 								</div>
 								<InspectorAdditions
 									menuId={ selectedMenuId }
 									onDeleteMenu={ deleteMenu }
+									isMenuBeingDeleted={ isMenuBeingDeleted }
 								/>
 								<BlockInspector bubblesVirtually={ false } />
 							</BlockEditorProvider>

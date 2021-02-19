@@ -174,7 +174,7 @@ export function initialize( id, settings ) {
 	);
 
 	render(
-		<Layout blockEditorSettings={ settings } />,
+		<div />,
 		document.getElementById( id )
 	);
 }

@@ -165,6 +165,7 @@ $z-layers: (
 	".components-circular-option-picker__option.is-pressed": 1,
 	// Needs to be higher than .components-circular-option-picker__option.is-pressed.
 	".components-circular-option-picker__option.is-pressed + svg": 2,
+	".edit-naviagation__shadow": 999,
 );
 
 @function z-index( $key ) {
