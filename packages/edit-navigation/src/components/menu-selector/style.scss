@@ -1,0 +1,16 @@
+.edit-navigation__menu-selector__select-menu-button {
+	width: 100%;
+}
+
+.edit-navigation-menu-selector {
+	padding: $grid-unit-15;
+	@extend .edit-navigation-editor;
+	&-header {
+		margin-bottom: $grid-unit-15;
+		font-weight: bold;
+	}
+	&-wrapper {
+		margin: 0 auto;
+		width: fit-content;
+	}
+}

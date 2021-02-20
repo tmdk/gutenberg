@@ -69,7 +69,7 @@ export default function Layout( { blockEditorSettings } ) {
 		<ErrorBoundary>
 			<div
 				hidden={ ! isMenuBeingDeleted }
-				className={ 'edit-naviagation__shadow' }
+				className={ 'edit-navigation-layout__overlay' }
 			/>
 			<SlotFillProvider>
 				<DropZoneProvider>
@@ -94,7 +94,9 @@ export default function Layout( { blockEditorSettings } ) {
 						{ ! hasFinishedInitialLoad && <Spinner /> }
 
 						{ hasFinishedInitialLoad && ! hasMenus && (
-							<EmptyState />
+							<EmptyState
+								onCreate={ () => setIsMenuDeleted( false ) }
+							/>
 						) }
 
 						{ isBlockEditorReady && (
@@ -112,25 +114,22 @@ export default function Layout( { blockEditorSettings } ) {
 								<NavigationEditorShortcuts
 									saveBlocks={ savePost }
 								/>
-								<div
-									className="edit-navigation-layout__canvas"
-									ref={ canvasRef }
-								>
-									{ isMenuDeleted ? (
-										<MenuSelector
-											onSelectMenu={ ( menu ) => {
-												setIsMenuDeleted( false );
-												selectMenu( menu );
-											} }
-											menus={ menus }
-										/>
-									) : (
+								{ isMenuDeleted ? (
+									<MenuSelector
+										onSelectMenu={ selectMenu }
+										menus={ menus }
+									/>
+								) : (
+									<div
+										className="edit-navigation-layout__canvas"
+										ref={ canvasRef }
+									>
 										<Editor
 											isPending={ ! hasLoadedMenus }
 											blocks={ blocks }
 										/>
-									) }
-								</div>
+									</div>
+								) }
 								<InspectorAdditions
 									menuId={ selectedMenuId }
 									onDeleteMenu={ deleteMenu }

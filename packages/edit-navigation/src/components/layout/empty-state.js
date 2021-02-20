@@ -8,11 +8,11 @@ import { Card, CardBody } from '@wordpress/components';
  */
 import AddMenu from '../add-menu';
 
-export default function EmptyState() {
+export default function EmptyState( { onCreate } ) {
 	return (
 		<Card className="edit-navigation-empty-state">
 			<CardBody>
-				<AddMenu />
+				<AddMenu onCreate={ onCreate } />
 			</CardBody>
 		</Card>
 	);

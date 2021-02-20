@@ -25,12 +25,12 @@ export default function InspectorAdditions( {
 	}
 
 	return (
-		<div>
+		<InspectorControls>
 			<AutoAddPagesPanel menuId={ menuId } />
 			<DeleteMenuPanel
 				onDeleteMenu={ onDeleteMenu }
 				isMenuBeingDeleted={ isMenuBeingDeleted }
 			/>
-		</div>
+		</InspectorControls>
 	);
 }

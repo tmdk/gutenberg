@@ -16,7 +16,7 @@ export default function useNavigationEditor() {
 		false
 	);
 	const [ selectedMenuId, setSelectedMenuId ] = useState( null );
-	const [ isMenuDeleted, setIsMenuDeleted ] = useState( true );
+	const [ isMenuDeleted, setIsMenuDeleted ] = useState( false );
 	const [ isMenuBeingDeleted, setIsMenuBeingDeleted ] = useState( false );
 
 	const { menus, hasLoadedMenus } = useSelect( ( select ) => {
@@ -57,6 +57,7 @@ export default function useNavigationEditor() {
 	);
 
 	const selectMenu = ( menuId ) => {
+		setIsMenuDeleted( false );
 		setSelectedMenuId( menuId );
 	};
 
