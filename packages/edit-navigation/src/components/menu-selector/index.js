@@ -1,7 +1,12 @@
 /**
  * WordPress dependencies
  */
-import { MenuGroup, MenuItemsChoice, Button, Dropdown } from '@wordpress/components';
+import {
+	MenuGroup,
+	MenuItemsChoice,
+	Button,
+	Dropdown,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
