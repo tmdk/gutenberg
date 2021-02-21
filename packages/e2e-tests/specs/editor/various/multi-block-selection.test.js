@@ -12,6 +12,8 @@ import {
 } from '@wordpress/e2e-test-utils';
 
 async function getSelectedFlatIndices() {
+	// Wait for the DOM to update.
+	await page.evaluate( () => new Promise( window.requestAnimationFrame ) );
 	return await page.evaluate( () => {
 		const indices = [];
 		let single;
