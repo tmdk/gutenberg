@@ -7,6 +7,7 @@ export * from './form-group';
 export * from './grid';
 export * from './h-stack';
 export * from './popover';
+export * from './spinner';
 export * from './text';
 export * from './truncate';
 export * from './v-stack';
