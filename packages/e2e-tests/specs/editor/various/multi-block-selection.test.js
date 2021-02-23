@@ -13,7 +13,7 @@ import {
 
 async function getSelectedFlatIndices() {
 	// Wait for the DOM to update.
-	await page.evaluate( () => new Promise( window.requestAnimationFrame ) );
+	await page.evaluate( () => new Promise( window.requestIdleCallback ) );
 	return await page.evaluate( () => {
 		const indices = [];
 		let single;
